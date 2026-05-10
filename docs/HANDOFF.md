@@ -71,6 +71,7 @@ Validation:
 - Playwright smoke tests via `npm run test:e2e`.
 - GitHub Actions CI via `.github/workflows/ci.yml`.
 - Global command menu via Ctrl/⌘+K.
+- Lesson completion and next-step panel on concept/visualizer pages.
 
 ## 4. How to run locally
 
@@ -357,6 +358,14 @@ Added:
 - Ctrl/⌘+K command menu for quick navigation across pages, learning paths, concepts, and visualizers.
 - Search entry points in marketing navigation and app shell.
 - E2E coverage for command-menu search and navigation.
+
+### PR #18 — Lesson completion panel
+
+Added:
+
+- Reusable lesson completion panel for concept and visualizer pages.
+- Clear “mark complete” action plus next-step recommendation based on learning path order.
+- E2E coverage for completion state and next-step guidance.
 
 ## 9. Main user flows
 
