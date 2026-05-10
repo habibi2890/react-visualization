@@ -72,6 +72,7 @@ Validation:
 - GitHub Actions CI via `.github/workflows/ci.yml`.
 - Global command menu via Ctrl/⌘+K.
 - Lesson completion and next-step panel on concept/visualizer pages.
+- Completion-aware learning path progress UI.
 
 ## 4. How to run locally
 
@@ -366,6 +367,14 @@ Added:
 - Reusable lesson completion panel for concept and visualizer pages.
 - Clear “mark complete” action plus next-step recommendation based on learning path order.
 - E2E coverage for completion state and next-step guidance.
+
+### PR #19 — Learning path progress UX
+
+Added:
+
+- Completion-aware learning path summary with next lesson CTA.
+- Sequential lesson rows with done/current/up-next states.
+- E2E coverage for path progress and next-lesson routing.
 
 ## 9. Main user flows
 

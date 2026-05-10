@@ -15,7 +15,7 @@ test("home page routes beginners to Start Here", async ({ page }) => {
 test("command menu jumps to lessons and routes", async ({ page }) => {
   await page.goto("/");
 
-  await page.keyboard.press("Control+K");
+  await page.getByRole("button", { name: /search/i }).click();
   await expect(page.getByRole("dialog", { name: /command menu/i })).toBeVisible();
   await page.getByLabel(/search pages/i).fill("route map");
   await page.getByRole("link", { name: /next\.js route map/i }).click();
@@ -58,6 +58,19 @@ test("concept detail includes completion guidance", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /useeffect dependency array/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /ready to lock in this concept/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /review full path/i })).toBeVisible();
+});
+
+test("learning path highlights progress and next lesson", async ({ page }) => {
+  await page.goto("/paths/react-beginner");
+
+  await expect(page.getByRole("heading", { name: "React Beginner" })).toBeVisible();
+  await expect(page.getByText(/your next best step is ready/i)).toBeVisible();
+  await expect(page.getByText(/1\/4 lessons complete/i)).toBeVisible();
+  await expect(page.getByText(/current/i).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Continue next lesson" })).toHaveAttribute(
+    "href",
+    "/visualizers/react-render-cycle",
+  );
 });
 
 test("route map explorer shows app router details", async ({ page }) => {
