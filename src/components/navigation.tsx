@@ -3,6 +3,7 @@ import {
   BarChart3,
   BookOpen,
   FlaskConical,
+  GitCompareArrows,
   Info,
   LayoutDashboard,
   Library,
@@ -21,6 +22,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/concepts", label: "Concepts", icon: Library },
+  { href: "/compare", label: "Compare", icon: GitCompareArrows },
   { href: "/roadmaps", label: "Roadmaps", icon: Map },
   { href: "/paths/react-beginner", label: "Learn React", icon: BookOpen },
   { href: "/paths/nextjs-beginner", label: "Learn Next.js", icon: Map },
@@ -38,6 +40,7 @@ const navItems = [
 const mobileQuickLinks = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/concepts", label: "Concepts" },
+  { href: "/compare", label: "Compare" },
   { href: "/roadmaps", label: "Roadmaps" },
   { href: "/route-map", label: "Route Map" },
   { href: "/playground", label: "Playground" },
@@ -66,6 +69,9 @@ export function MarketingNav() {
           </Link>
           <Link href="/roadmaps" className="hover:text-foreground">
             Roadmaps
+          </Link>
+          <Link href="/compare" className="hover:text-foreground">
+            Compare
           </Link>
           <Link href="/route-map" className="hover:text-foreground">
             Route Map

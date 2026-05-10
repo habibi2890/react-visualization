@@ -46,6 +46,7 @@ export default function AboutPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/concepts">Browse concepts</ButtonLink>
+              <ButtonLink href="/compare" variant="outline">Compare concepts</ButtonLink>
               <ButtonLink href="/roadmaps" variant="outline">View roadmaps</ButtonLink>
               <ButtonLink href="/playground" variant="outline">Try playground</ButtonLink>
             </div>
