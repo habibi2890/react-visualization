@@ -81,6 +81,9 @@ export default function Home() {
               <ButtonLink href="/compare" variant="ghost">
                 Compare concepts
               </ButtonLink>
+              <ButtonLink href="/glossary" variant="ghost">
+                Glossary
+              </ButtonLink>
             </div>
           </div>
           <HeroVisualizerPreview />

@@ -31,6 +31,9 @@ export default function DashboardPage() {
               <ButtonLink href="/compare" variant="ghost">
                 Compare concepts
               </ButtonLink>
+              <ButtonLink href="/glossary" variant="ghost">
+                Glossary
+              </ButtonLink>
             </div>
           </Card>
 
