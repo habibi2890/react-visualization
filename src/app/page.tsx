@@ -147,6 +147,11 @@ export default function Home() {
                     </div>
                     <h3 className="mt-5 text-xl font-bold">{feature.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-muted">{feature.description}</p>
+                    {feature.title === "Next.js Route Map" ? (
+                      <ButtonLink href="/route-map" variant="ghost" className="mt-5 px-0">
+                        Explore route map
+                      </ButtonLink>
+                    ) : null}
                   </Card>
                 );
               })}
