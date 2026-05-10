@@ -9,6 +9,7 @@ import {
   Map,
   PlayCircle,
   Puzzle,
+  Route,
   Settings,
   Star,
   Trophy,
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/roadmaps", label: "Roadmaps", icon: Map },
   { href: "/paths/react-beginner", label: "Learn React", icon: BookOpen },
   { href: "/paths/nextjs-beginner", label: "Learn Next.js", icon: Map },
+  { href: "/route-map", label: "Route Map", icon: Route },
   { href: "/visualizers/props-vs-state", label: "Visualizers", icon: PlayCircle },
   { href: "/playground", label: "Playground", icon: Puzzle },
   { href: "/quiz", label: "Quiz", icon: Trophy },
@@ -37,6 +39,7 @@ const mobileQuickLinks = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/concepts", label: "Concepts" },
   { href: "/roadmaps", label: "Roadmaps" },
+  { href: "/route-map", label: "Route Map" },
   { href: "/playground", label: "Playground" },
   { href: "/quiz", label: "Quiz" },
 ];
@@ -63,6 +66,9 @@ export function MarketingNav() {
           </Link>
           <Link href="/roadmaps" className="hover:text-foreground">
             Roadmaps
+          </Link>
+          <Link href="/route-map" className="hover:text-foreground">
+            Route Map
           </Link>
           <Link href="/visualizers/props-vs-state" className="hover:text-foreground">
             Visualizers
