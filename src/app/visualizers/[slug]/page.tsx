@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { LessonCompletionPanel } from "@/components/lesson-completion-panel";
+import { LessonNotes } from "@/components/lesson-notes";
 import { AppShell } from "@/components/navigation";
 import { KeysListDiffingVisualizer } from "@/components/visualizers/keys-list-diffing-visualizer";
 import { PropsVsStateVisualizer } from "@/components/visualizers/props-vs-state-visualizer";
@@ -62,6 +63,10 @@ export default async function VisualizerPage({
         </Card>
 
         <VisualizerSwitch slug={slug} />
+
+        <div className="mt-8">
+          <LessonNotes slug={slug} title={concept.title} />
+        </div>
 
         <div className="mt-8">
           <LessonCompletionPanel slug={slug} />

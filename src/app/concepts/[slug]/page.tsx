@@ -3,6 +3,7 @@ import { BookmarkButton, CompleteLessonButton } from "@/components/bookmark-butt
 import { AppShell } from "@/components/navigation";
 import { CodeBlock } from "@/components/code-block";
 import { LessonCompletionPanel } from "@/components/lesson-completion-panel";
+import { LessonNotes } from "@/components/lesson-notes";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -63,6 +64,10 @@ export default async function ConceptDetailPage({
             <p className="mt-4 font-semibold">{concept.commonMistakes[0].title}</p>
             <p className="mt-2 leading-7 text-muted">{concept.commonMistakes[0].explanation}</p>
           </Card>
+
+          <div className="mt-8">
+            <LessonNotes slug={concept.slug} title={concept.title} />
+          </div>
 
           <div className="mt-8">
             <LessonCompletionPanel slug={concept.slug} mode="concept" />

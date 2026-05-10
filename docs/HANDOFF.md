@@ -74,6 +74,7 @@ Validation:
 - Lesson completion and next-step panel on concept/visualizer pages.
 - Completion-aware learning path progress UI.
 - Resume-focused dashboard learning plan.
+- Per-lesson local notes.
 
 ## 4. How to run locally
 
@@ -385,6 +386,15 @@ Added:
 - Quick actions for playground practice, mistake debugging, and glossary review.
 - Bookmark/recommendation section to reduce return-user friction.
 - E2E coverage for dashboard resume CTA and quick actions.
+
+### PR #21 — Lesson notes
+
+Added:
+
+- Per-lesson notes on concept and visualizer pages.
+- Local persistence through the existing progress store.
+- Prompt chips to help beginners capture mental models and common mistakes.
+- E2E coverage for note persistence.
 
 ## 9. Main user flows
 
