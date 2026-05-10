@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/concepts", label: "Concepts", icon: Library },
+  { href: "/roadmaps", label: "Roadmaps", icon: Map },
   { href: "/paths/react-beginner", label: "Learn React", icon: BookOpen },
   { href: "/paths/nextjs-beginner", label: "Learn Next.js", icon: Map },
   { href: "/visualizers/props-vs-state", label: "Visualizers", icon: PlayCircle },
@@ -35,6 +36,7 @@ const navItems = [
 const mobileQuickLinks = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/concepts", label: "Concepts" },
+  { href: "/roadmaps", label: "Roadmaps" },
   { href: "/playground", label: "Playground" },
   { href: "/quiz", label: "Quiz" },
 ];
@@ -58,6 +60,9 @@ export function MarketingNav() {
           </Link>
           <Link href="/paths/nextjs-beginner" className="hover:text-foreground">
             Learn Next.js
+          </Link>
+          <Link href="/roadmaps" className="hover:text-foreground">
+            Roadmaps
           </Link>
           <Link href="/visualizers/props-vs-state" className="hover:text-foreground">
             Visualizers
