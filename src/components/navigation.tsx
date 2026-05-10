@@ -18,6 +18,7 @@ import {
   Star,
   Trophy,
 } from "lucide-react";
+import { CommandMenuButton } from "@/components/command-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -102,6 +103,7 @@ export function MarketingNav() {
           </Link>
         </div>
         <div className="flex items-center gap-3">
+          <CommandMenuButton className="hidden md:inline-flex" />
           <ThemeToggle />
           <ButtonLink href="/start" className="hidden sm:inline-flex">
             Start learning
@@ -148,7 +150,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="hidden text-sm text-muted lg:block">
             Make invisible frontend concepts visible.
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <CommandMenuButton />
+            <ThemeToggle />
+          </div>
         </header>
         <nav
           aria-label="Mobile quick navigation"

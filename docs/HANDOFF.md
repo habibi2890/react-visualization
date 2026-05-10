@@ -70,6 +70,7 @@ Validation:
 - Production build via `npm run build`.
 - Playwright smoke tests via `npm run test:e2e`.
 - GitHub Actions CI via `.github/workflows/ci.yml`.
+- Global command menu via Ctrl/⌘+K.
 
 ## 4. How to run locally
 
@@ -349,6 +350,14 @@ Added:
 - Helper text in step controls so shortcuts are discoverable.
 - E2E coverage for keyboard-driven step navigation.
 
+### PR #17 — Global command menu
+
+Added:
+
+- Ctrl/⌘+K command menu for quick navigation across pages, learning paths, concepts, and visualizers.
+- Search entry points in marketing navigation and app shell.
+- E2E coverage for command-menu search and navigation.
+
 ## 9. Main user flows
 
 ### Beginner first-time learner
@@ -461,6 +470,7 @@ Existing implementation uses:
 - Semantic headings and sections.
 - `aria-label` on major visualization sections.
 - `aria-hidden` for decorative icons.
+- Ctrl/⌘+K command menu for fast navigation.
 - Visible focus styles through shared component classes.
 - Text explanations for important visual states.
 

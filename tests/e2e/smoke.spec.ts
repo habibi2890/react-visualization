@@ -12,6 +12,21 @@ test("home page routes beginners to Start Here", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /simple first path/i })).toBeVisible();
 });
 
+test("command menu jumps to lessons and routes", async ({ page }) => {
+  await page.goto("/");
+
+  await page.keyboard.press("Control+K");
+  await expect(page.getByRole("dialog", { name: /command menu/i })).toBeVisible();
+  await page.getByLabel(/search pages/i).fill("route map");
+  await page.getByRole("link", { name: /next\.js route map/i }).click();
+  await expect(page).toHaveURL(/\/route-map$/);
+
+  await page.getByRole("button", { name: /search/i }).click();
+  await page.getByLabel(/search pages/i).fill("props visualizer");
+  await page.getByRole("link", { name: /react props vs state visualizer/i }).click();
+  await expect(page).toHaveURL(/\/visualizers\/props-vs-state$/);
+});
+
 test("render cycle visualizer advances through steps", async ({ page }) => {
   await page.goto("/visualizers/react-render-cycle");
 
