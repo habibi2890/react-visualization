@@ -83,6 +83,22 @@ test("bookmarks page shows a note-aware review queue", async ({ page }) => {
   );
 });
 
+test("quiz gives feedback, score, and next concept flow", async ({ page }) => {
+  await page.goto("/quiz");
+
+  await expect(page.getByRole("heading", { name: /check your mental model/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /quiz progress/i })).toBeVisible();
+
+  await page.getByRole("button", { name: /inside productcard/i }).click();
+  await page.getByRole("button", { name: /submit answer/i }).click();
+  await expect(page.getByText(/not quite yet/i)).toBeVisible();
+  await expect(page.getByText(/correct answer:/i)).toBeVisible();
+  await expect(page.getByText(/session/i).locator("..").getByText("0%")).toBeVisible();
+
+  await page.getByRole("button", { name: /next concept/i }).click();
+  await expect(page.getByRole("heading", { name: "React Render Cycle", exact: true })).toBeVisible();
+});
+
 test("learning path highlights progress and next lesson", async ({ page }) => {
   await page.goto("/paths/react-beginner");
 
