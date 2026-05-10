@@ -77,6 +77,7 @@ Validation:
 - Per-lesson local notes.
 - Note-aware bookmarks review queue.
 - Quiz feedback with session/best score summary.
+- Progress skill map and weak-area review recommendations.
 
 ## 4. How to run locally
 
@@ -415,6 +416,15 @@ Added:
 - Stronger answer feedback including correct-answer reveal for wrong choices.
 - Next concept CTA after submission.
 - E2E coverage for quiz feedback and next-concept flow.
+
+### PR #24 — Progress skill map
+
+Added:
+
+- Progress page skill map combining lesson completion, quiz scores, and notes.
+- Weak-area recommendation card with review/quiz/bookmark CTAs.
+- Notes metric in progress summary.
+- E2E coverage for skill map and weak-area recommendation.
 
 ## 9. Main user flows
 

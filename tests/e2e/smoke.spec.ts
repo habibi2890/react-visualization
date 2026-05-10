@@ -99,6 +99,16 @@ test("quiz gives feedback, score, and next concept flow", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "React Render Cycle", exact: true })).toBeVisible();
 });
 
+test("progress page shows skill map and weak area", async ({ page }) => {
+  await page.goto("/progress");
+
+  await expect(page.getByRole("heading", { name: /track what you understand/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /where your mental models are forming/i })).toBeVisible();
+  await expect(page.getByText(/react fundamentals/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /weak area to review next/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /retake quiz/i })).toHaveAttribute("href", "/quiz");
+});
+
 test("learning path highlights progress and next lesson", async ({ page }) => {
   await page.goto("/paths/react-beginner");
 
