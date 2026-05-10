@@ -68,6 +68,7 @@ Validation:
 - ESLint via `npm run lint`.
 - TypeScript via `npm run typecheck`.
 - Production build via `npm run build`.
+- Playwright smoke tests via `npm run test:e2e`.
 - GitHub Actions CI via `.github/workflows/ci.yml`.
 
 ## 4. How to run locally
@@ -110,6 +111,7 @@ Run these before every PR:
 npm run lint
 npm run typecheck
 npm run build
+npm run test:e2e
 ```
 
 All of these passed locally for the latest delivered PRs.
@@ -125,6 +127,8 @@ From `package.json`:
 | `npm run start` | Start production server after build |
 | `npm run lint` | Run ESLint |
 | `npm run typecheck` | Run TypeScript without emitting files |
+| `npm run test:e2e` | Run Playwright smoke tests |
+| `npm run test:e2e:install` | Install Chromium and OS deps for Playwright |
 
 ## 6. Repository structure
 
@@ -329,6 +333,14 @@ Added:
 - CI validation for `npm ci`, `npm run lint`, `npm run typecheck`, and `npm run build`.
 - README CI status badge.
 
+### PR #15 — Playwright smoke tests
+
+Added:
+
+- Playwright config and Chromium smoke test suite.
+- E2E coverage for landing → Start Here, React Render Cycle visualizer controls, Route Map, Playground, Compare, and Glossary.
+- CI step for Playwright smoke tests.
+
 ## 9. Main user flows
 
 ### Beginner first-time learner
@@ -473,19 +485,16 @@ This is an MVP/prototype. Current limitations:
 - No real code execution sandbox.
 - Practice Playground is guided and keyword-based, not a full compiler/runtime.
 - No hosted preview deployment configured.
-- No E2E test suite yet.
+- E2E coverage is smoke-level only, not exhaustive.
 
 ## 16. Recommended next steps
 
 High-value next PRs:
 
-1. Add E2E smoke tests
-   - Playwright test for:
-     - `/start`
-     - `/visualizers/props-vs-state`
-     - `/visualizers/react-render-cycle`
-     - `/route-map`
-     - `/playground`
+1. Expand E2E coverage
+   - Add mobile viewport checks.
+   - Add route coverage for every visualizer.
+   - Add bookmark/progress persistence tests.
 
 2. Add a real code playground
    - Sandpack or Monaco.
@@ -531,6 +540,7 @@ High-value next PRs:
 npm run lint
 npm run typecheck
 npm run build
+npm run test:e2e
 ```
 
 ## 18. How to add a new page
