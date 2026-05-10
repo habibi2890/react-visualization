@@ -78,6 +78,9 @@ export default function Home() {
               <ButtonLink href="/visualizers/react-render-cycle" variant="outline">
                 Try Render Cycle
               </ButtonLink>
+              <ButtonLink href="/compare" variant="ghost">
+                Compare concepts
+              </ButtonLink>
             </div>
           </div>
           <HeroVisualizerPreview />

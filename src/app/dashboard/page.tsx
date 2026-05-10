@@ -28,6 +28,9 @@ export default function DashboardPage() {
               <ButtonLink href="/paths/react-beginner" variant="outline">
                 View React path
               </ButtonLink>
+              <ButtonLink href="/compare" variant="ghost">
+                Compare concepts
+              </ButtonLink>
             </div>
           </Card>
 
