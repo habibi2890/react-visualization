@@ -1,4 +1,5 @@
 import { AppShell } from "@/components/navigation";
+import { SettingsPanel } from "@/components/settings-panel";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -20,6 +21,9 @@ export default function SettingsPage() {
             <ThemeToggle />
           </div>
         </Card>
+        <div className="mt-6">
+          <SettingsPanel />
+        </div>
       </div>
     </AppShell>
   );

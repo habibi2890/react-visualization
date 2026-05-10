@@ -1,12 +1,15 @@
 import Link from "next/link";
 import {
+  BarChart3,
   BookOpen,
   FlaskConical,
+  Info,
   LayoutDashboard,
   Library,
   Map,
   PlayCircle,
   Puzzle,
+  Settings,
   Star,
   Trophy,
 } from "lucide-react";
@@ -23,7 +26,17 @@ const navItems = [
   { href: "/playground", label: "Playground", icon: Puzzle },
   { href: "/quiz", label: "Quiz", icon: Trophy },
   { href: "/mistake-lab", label: "Mistake Lab", icon: FlaskConical },
+  { href: "/progress", label: "Progress", icon: BarChart3 },
   { href: "/bookmarks", label: "Bookmarks", icon: Star },
+  { href: "/settings", label: "Settings", icon: Settings },
+  { href: "/about", label: "About", icon: Info },
+];
+
+const mobileQuickLinks = [
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/concepts", label: "Concepts" },
+  { href: "/playground", label: "Playground" },
+  { href: "/quiz", label: "Quiz" },
 ];
 
 export function MarketingNav() {
@@ -105,6 +118,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
           <ThemeToggle />
         </header>
+        <nav
+          aria-label="Mobile quick navigation"
+          className="sticky top-[57px] z-20 flex gap-2 overflow-x-auto border-b border-border bg-background/90 px-4 py-3 backdrop-blur lg:hidden"
+        >
+          {mobileQuickLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="shrink-0 rounded-full border border-border bg-surface px-4 py-2 text-sm font-semibold text-muted"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
         <main>{children}</main>
       </div>
     </div>
