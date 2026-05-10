@@ -45,6 +45,19 @@ test("render cycle visualizer advances through steps", async ({ page }) => {
 
   await page.keyboard.press("Home");
   await expect(page.getByText("Step 1 of")).toBeVisible();
+
+  await expect(page.getByRole("heading", { name: /ready to lock in this concept/i })).toBeVisible();
+  await page.getByRole("button", { name: /mark lesson complete/i }).click();
+  await expect(page.getByText(/nice work/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /react keys & list diffing/i })).toBeVisible();
+});
+
+test("concept detail includes completion guidance", async ({ page }) => {
+  await page.goto("/concepts/use-effect-dependency-array");
+
+  await expect(page.getByRole("heading", { name: /useeffect dependency array/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /ready to lock in this concept/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /review full path/i })).toBeVisible();
 });
 
 test("route map explorer shows app router details", async ({ page }) => {
