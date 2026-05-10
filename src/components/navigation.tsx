@@ -1,5 +1,15 @@
 import Link from "next/link";
-import { BookOpen, FlaskConical, LayoutDashboard, Library, Map, PlayCircle, Star } from "lucide-react";
+import {
+  BookOpen,
+  FlaskConical,
+  LayoutDashboard,
+  Library,
+  Map,
+  PlayCircle,
+  Puzzle,
+  Star,
+  Trophy,
+} from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +20,8 @@ const navItems = [
   { href: "/paths/react-beginner", label: "Learn React", icon: BookOpen },
   { href: "/paths/nextjs-beginner", label: "Learn Next.js", icon: Map },
   { href: "/visualizers/props-vs-state", label: "Visualizers", icon: PlayCircle },
+  { href: "/playground", label: "Playground", icon: Puzzle },
+  { href: "/quiz", label: "Quiz", icon: Trophy },
   { href: "/mistake-lab", label: "Mistake Lab", icon: FlaskConical },
   { href: "/bookmarks", label: "Bookmarks", icon: Star },
 ];
@@ -36,6 +48,9 @@ export function MarketingNav() {
           </Link>
           <Link href="/visualizers/props-vs-state" className="hover:text-foreground">
             Visualizers
+          </Link>
+          <Link href="/playground" className="hover:text-foreground">
+            Playground
           </Link>
           <Link href="/dashboard" className="hover:text-foreground">
             Dashboard

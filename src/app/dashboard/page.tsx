@@ -1,6 +1,6 @@
 import { Activity, ArrowRight, Bookmark, Sparkles, Target } from "lucide-react";
 import { AppShell } from "@/components/navigation";
-import { LessonCard } from "@/components/lesson-card";
+import { ProgressAwareLessonCard } from "@/components/progress-aware-lesson-card";
 import { ProgressRing } from "@/components/progress-ring";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -56,8 +56,8 @@ export default function DashboardPage() {
               </ButtonLink>
             </div>
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {concepts.map((lesson, index) => (
-                <LessonCard key={lesson.id} lesson={lesson} completed={index === 0} />
+              {concepts.map((lesson) => (
+                <ProgressAwareLessonCard key={lesson.id} lesson={lesson} />
               ))}
             </div>
           </div>

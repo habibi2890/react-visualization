@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { BookmarkButton, CompleteLessonButton } from "@/components/bookmark-button";
 import { AppShell } from "@/components/navigation";
 import { CodeBlock } from "@/components/code-block";
 import { Badge } from "@/components/ui/badge";
@@ -76,6 +77,10 @@ export default async function ConceptDetailPage({
             <ButtonLink href={`/visualizers/${concept.slug}`} className="mt-6 w-full">
               Open visualizer
             </ButtonLink>
+            <div className="mt-3 flex flex-wrap gap-3">
+              <BookmarkButton slug={concept.slug} />
+              <CompleteLessonButton slug={concept.slug} />
+            </div>
           </Card>
           <Card>
             <h2 className="text-xl font-bold">Related concepts</h2>

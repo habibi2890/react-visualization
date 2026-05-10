@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Database, Monitor, MousePointerClick, Server, ShieldAlert } from "lucide-react";
+import { BookmarkButton, CompleteLessonButton } from "@/components/bookmark-button";
 import { CodeBlock } from "@/components/code-block";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -105,15 +106,21 @@ export function ServerClientVisualizer() {
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[1fr_0.9fr]">
-        <StepExplanation
-          lesson={lesson}
-          stepIndex={stepIndex}
-          playing={playing}
-          onPrevious={player.previous}
-          onReset={player.reset}
-          onTogglePlay={() => player.setPlaying((value) => !value)}
-          onNext={player.next}
-        />
+        <div className="grid gap-3">
+          <StepExplanation
+            lesson={lesson}
+            stepIndex={stepIndex}
+            playing={playing}
+            onPrevious={player.previous}
+            onReset={player.reset}
+            onTogglePlay={() => player.setPlaying((value) => !value)}
+            onNext={player.next}
+          />
+          <div className="flex flex-wrap gap-3">
+            <BookmarkButton slug={lesson.slug} />
+            <CompleteLessonButton slug={lesson.slug} />
+          </div>
+        </div>
         <QuizPanel lesson={lesson} />
       </div>
 
