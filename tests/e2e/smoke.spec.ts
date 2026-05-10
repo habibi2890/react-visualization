@@ -17,11 +17,18 @@ test("render cycle visualizer advances through steps", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "React Render Cycle" })).toBeVisible();
   await expect(page.getByText("Step 1 of")).toBeVisible();
+  await expect(page.getByText(/shortcuts:/i)).toBeVisible();
 
   await page.getByRole("button", { name: "Next", exact: true }).click();
   await expect(page.getByText("Step 2 of")).toBeVisible();
 
-  await page.getByRole("button", { name: "Reset", exact: true }).click();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByText("Step 3 of")).toBeVisible();
+
+  await page.keyboard.press("ArrowLeft");
+  await expect(page.getByText("Step 2 of")).toBeVisible();
+
+  await page.keyboard.press("Home");
   await expect(page.getByText("Step 1 of")).toBeVisible();
 });
 

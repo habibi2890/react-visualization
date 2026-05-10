@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Pause, Play, RotateCcw } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,6 +11,13 @@ import type { ConceptLesson } from "@/types/lesson";
 export function useStepPlayer(stepCount: number) {
   const [stepIndex, setStepIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
+
+  const next = useCallback(() => setStepIndex((value) => Math.min(stepCount - 1, value + 1)), [stepCount]);
+  const previous = useCallback(() => setStepIndex((value) => Math.max(0, value - 1)), []);
+  const reset = useCallback(() => {
+    setStepIndex(0);
+    setPlaying(false);
+  }, []);
 
   useEffect(() => {
     if (!playing) return;
@@ -29,17 +36,49 @@ export function useStepPlayer(stepCount: number) {
     return () => window.clearInterval(id);
   }, [playing, stepCount]);
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      const target = event.target;
+      const tagName = target instanceof HTMLElement ? target.tagName : "";
+
+      if (["INPUT", "TEXTAREA", "SELECT"].includes(tagName)) {
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        next();
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        previous();
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        reset();
+      }
+
+      if (event.key === " ") {
+        event.preventDefault();
+        setPlaying((value) => !value);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [next, previous, reset]);
+
   return {
     stepIndex,
     setStepIndex,
     playing,
     setPlaying,
-    next: () => setStepIndex((value) => Math.min(stepCount - 1, value + 1)),
-    previous: () => setStepIndex((value) => Math.max(0, value - 1)),
-    reset: () => {
-      setStepIndex(0);
-      setPlaying(false);
-    },
+    next,
+    previous,
+    reset,
   };
 }
 
@@ -101,6 +140,9 @@ export function StepExplanation({
           </Button>
         </div>
       </div>
+      <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+        Shortcuts: ← previous · → next · Space play/pause · Home reset
+      </p>
     </Card>
   );
 }
