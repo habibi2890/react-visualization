@@ -75,6 +75,7 @@ Validation:
 - Completion-aware learning path progress UI.
 - Resume-focused dashboard learning plan.
 - Per-lesson local notes.
+- Note-aware bookmarks review queue.
 
 ## 4. How to run locally
 
@@ -395,6 +396,15 @@ Added:
 - Local persistence through the existing progress store.
 - Prompt chips to help beginners capture mental models and common mistakes.
 - E2E coverage for note persistence.
+
+### PR #22 — Bookmarks review queue
+
+Added:
+
+- Bookmarks page upgraded into a review queue.
+- Saved concepts show completion state, note preview, review CTA, and concept CTA.
+- Seeded example note for the default saved Props vs State lesson.
+- E2E coverage for review queue and note preview.
 
 ## 9. Main user flows
 

@@ -28,7 +28,9 @@ const initialProgress = {
   bookmarks: ["props-vs-state"],
   quizScores: {},
   playgroundAttempts: {},
-  lessonNotes: {},
+  lessonNotes: {
+    "props-vs-state": "Props flow down. State lives where changes happen.",
+  },
   preferences: {
     reducedMotion: false,
     showHintsByDefault: false,
