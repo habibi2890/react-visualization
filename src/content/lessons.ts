@@ -190,6 +190,172 @@ function ProductCard({ name, price, quantity, onAdd }) {
   relatedConcepts: ["State as memory", "Lifting state up", "Rendering basics"],
 };
 
+export const renderCycleLesson: ConceptLesson = {
+  id: "react-render-cycle",
+  slug: "react-render-cycle",
+  title: "React Render Cycle",
+  category: "react",
+  difficulty: "beginner",
+  estimatedMinutes: 15,
+  prerequisites: ["Props vs State", "Event handling"],
+  shortDescription:
+    "Follow a click from event handler to state queue, render phase, commit phase, and effect timing.",
+  learningGoals: [
+    "Describe what happens after setState",
+    "Separate render phase from commit phase",
+    "Understand why state updates are queued",
+    "Avoid reading state immediately after setting it",
+  ],
+  explanation:
+    "When state changes, React schedules work, calculates the next UI, commits the change, then runs effects after the screen updates.",
+  mentalModel:
+    "Think of React like a careful stage crew: take the request, rehearse the next scene offstage, update the stage, then run after-show tasks.",
+  codeExamples: [
+    {
+      id: "cart-counter-render-cycle",
+      title: "Cart counter render cycle",
+      language: "tsx",
+      highlightedLines: [2, 5, 6, 9, 12],
+      code: `function CartCounter() {
+  const [count, setCount] = useState(0);
+
+  function addItem() {
+    setCount((current) => current + 1);
+    console.log(count);
+  }
+
+  useEffect(() => {
+    document.title = \`Cart: \${count}\`;
+  }, [count]);
+
+  return <button onClick={addItem}>Items: {count}</button>;
+}`,
+    },
+  ],
+  visualizationType: "timeline",
+  steps: [
+    {
+      id: "current-ui",
+      title: "Current UI is on screen",
+      description:
+        "The button shows Items: 0. React is idle until the user interacts with the page.",
+      activeCodeLines: [2, 12],
+      timelineEvent: "UI shows count 0",
+      inspectorNotes: ["Current committed state is 0.", "No update is scheduled yet."],
+      stateValue: 0,
+      previousStateValue: undefined,
+      activeComponents: ["UI", "Committed state"],
+    },
+    {
+      id: "event-handler",
+      title: "User clicks the button",
+      description:
+        "The click runs addItem. Event handlers are a common place to request state changes.",
+      activeCodeLines: [4, 12],
+      timelineEvent: "Click event",
+      inspectorNotes: ["The event handler runs in the browser.", "State has not changed yet."],
+      stateValue: 0,
+      activeComponents: ["Event handler"],
+    },
+    {
+      id: "queue-update",
+      title: "State update is queued",
+      description:
+        "setCount adds an update request. React will calculate the next state during render.",
+      activeCodeLines: [5, 6],
+      timelineEvent: "setState queued",
+      inspectorNotes: [
+        "Updater receives the current value.",
+        "console.log(count) still sees the old render value.",
+      ],
+      stateValue: 0,
+      previousStateValue: 0,
+      activeComponents: ["Update queue"],
+    },
+    {
+      id: "render-phase",
+      title: "Render phase calculates next UI",
+      description:
+        "React calls CartCounter again with count 1 and prepares the next button text.",
+      activeCodeLines: [1, 2, 12],
+      timelineEvent: "Render phase",
+      inspectorNotes: ["Render should stay pure.", "React calculates Items: 1 offscreen."],
+      stateValue: 1,
+      previousStateValue: 0,
+      activeComponents: ["Render phase", "CartCounter"],
+    },
+    {
+      id: "commit-phase",
+      title: "Commit phase updates the DOM",
+      description:
+        "React commits the prepared change. The visible button now says Items: 1.",
+      activeCodeLines: [12],
+      timelineEvent: "Commit DOM update",
+      inspectorNotes: ["The screen changes during commit.", "The committed state is now 1."],
+      stateValue: 1,
+      previousStateValue: 0,
+      activeComponents: ["Commit phase", "DOM"],
+    },
+    {
+      id: "effect-phase",
+      title: "Effect runs after the screen updates",
+      description:
+        "Because count changed, the effect runs after commit and updates document.title.",
+      activeCodeLines: [9, 10, 11],
+      timelineEvent: "Effect after commit",
+      inspectorNotes: ["Effects run after paint.", "Dependency [count] changed from 0 to 1."],
+      stateValue: 1,
+      previousStateValue: 0,
+      activeComponents: ["Effect"],
+    },
+    {
+      id: "stale-log-mistake",
+      title: "Common mistake",
+      description:
+        "Reading count right after setCount often shows the previous render value. Use the updater value or an effect when you need the latest committed value.",
+      activeCodeLines: [5, 6],
+      timelineEvent: "Old value logged",
+      inspectorNotes: ["State variables are snapshots for that render.", "The next value appears after React renders again."],
+      stateValue: 1,
+      previousStateValue: 0,
+      activeComponents: ["Mistake"],
+      showMistake: true,
+    },
+  ],
+  commonMistakes: [
+    {
+      id: "reading-state-after-set",
+      title: "Expecting state to change immediately after setState",
+      brokenCode: `function addItem() {
+  setCount(count + 1);
+  console.log(count);
+}`,
+      explanation:
+        "The count variable belongs to the current render, so it still holds the old snapshot inside this event handler.",
+      fix:
+        "Use an updater function for the next value, or read the committed value in an effect that depends on count.",
+      preventionTip:
+        "Treat state as a snapshot. setState requests the next render; it does not rewrite the current variable.",
+    },
+  ],
+  quiz: [
+    {
+      id: "commit-phase-job",
+      question: "When does the visible DOM update happen?",
+      options: [
+        "Immediately when setCount is called",
+        "During the render phase before React compares anything",
+        "During the commit phase after React prepares the next UI",
+        "Only when useEffect runs",
+      ],
+      correctOptionIndex: 2,
+      explanation:
+        "React calculates the next UI during render, then updates the visible DOM during commit.",
+    },
+  ],
+  relatedConcepts: ["State snapshots", "Render purity", "Effect timing"],
+};
+
 export const useEffectDependencyLesson: ConceptLesson = {
   id: "react-use-effect-dependencies",
   slug: "use-effect-dependency-array",
@@ -470,6 +636,7 @@ export default async function ProductPage() {
 
 export const concepts: ConceptLesson[] = [
   propsVsStateLesson,
+  renderCycleLesson,
   useEffectDependencyLesson,
   serverClientComponentsLesson,
 ];
@@ -491,7 +658,7 @@ export const learningPaths: LearningPath[] = [
       "Predict simple re-renders",
       "Avoid common beginner mistakes",
     ],
-    lessonSlugs: ["props-vs-state", "use-effect-dependency-array"],
+    lessonSlugs: ["props-vs-state", "react-render-cycle", "use-effect-dependency-array"],
   },
   {
     id: "nextjs-beginner",

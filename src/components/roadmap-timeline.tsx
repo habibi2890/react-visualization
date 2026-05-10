@@ -8,7 +8,7 @@ const roadmapStages = [
   {
     title: "Foundation mental model",
     description: "Start with component communication, state ownership, and re-render basics.",
-    links: ["props-vs-state"],
+    links: ["props-vs-state", "react-render-cycle"],
   },
   {
     title: "Hooks behavior",

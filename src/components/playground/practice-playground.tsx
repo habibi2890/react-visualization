@@ -11,6 +11,25 @@ import { useProgressStore } from "@/stores/progress-store";
 
 const challenges = [
   {
+    slug: "react-render-cycle",
+    title: "Avoid stale state logs",
+    prompt: "Update count safely and avoid assuming console.log sees the next render value.",
+    starter: `function addItem() {
+  setCount(count + 1);
+  console.log(count);
+}`,
+    solution: `function addItem() {
+  setCount((current) => current + 1);
+}
+
+useEffect(() => {
+  console.log(count);
+}, [count]);`,
+    hint: "State variables are snapshots. The next value appears after React renders again.",
+    visual: "setCount queues work. React renders the next UI, commits it, then effects can read the latest committed value.",
+    keyword: "(current)",
+  },
+  {
     slug: "props-vs-state",
     title: "Fix state ownership",
     prompt: "Move the changing value into ProductPage state and pass it down as props.",

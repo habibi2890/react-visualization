@@ -75,8 +75,8 @@ export default function Home() {
                 Start learning visually
                 <ArrowRight size={18} aria-hidden />
               </ButtonLink>
-              <ButtonLink href="/visualizers/props-vs-state" variant="outline">
-                Try Props vs State
+              <ButtonLink href="/visualizers/react-render-cycle" variant="outline">
+                Try Render Cycle
               </ButtonLink>
             </div>
           </div>
