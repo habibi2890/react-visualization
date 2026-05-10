@@ -5,6 +5,7 @@ Product and UI/UX blueprint for an interactive learning platform that makes Reac
 ## Blueprint
 
 - [Complete product blueprint](docs/product-blueprint.md)
+- [Project handoff](docs/HANDOFF.md)
 
 ## MVP focus
 
