@@ -2,6 +2,7 @@
 
 import { Award, BookOpen, Brain, Compass, NotebookPen, Target } from "lucide-react";
 import { ProgressRing } from "@/components/progress-ring";
+import { RecentActivity } from "@/components/recent-activity";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -118,6 +119,8 @@ export function ProgressSummary() {
           <ButtonLink href="/bookmarks" variant="ghost">Open review queue</ButtonLink>
         </div>
       </Card>
+
+      <RecentActivity />
 
       <Card>
         <div className="flex items-center gap-3">
