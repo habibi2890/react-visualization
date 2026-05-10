@@ -171,6 +171,7 @@ export function RenderCycleVisualizer() {
             onReset={player.reset}
             onTogglePlay={() => player.setPlaying((value) => !value)}
             onNext={player.next}
+            reducedMotion={player.reducedMotion}
           />
           <div className="flex flex-wrap gap-3">
             <BookmarkButton slug={lesson.slug} />

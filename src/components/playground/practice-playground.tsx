@@ -100,12 +100,14 @@ function AddToCartButton({ product }) {
 ];
 
 export function PracticePlayground() {
+  const recordPlaygroundAttempt = useProgressStore((state) => state.recordPlaygroundAttempt);
+  const showHintsByDefault = useProgressStore((state) => state.preferences.showHintsByDefault);
   const [selectedSlug, setSelectedSlug] = useState(challenges[0].slug);
   const challenge = challenges.find((item) => item.slug === selectedSlug) ?? challenges[0];
   const [code, setCode] = useState(challenge.starter);
-  const [showHint, setShowHint] = useState(false);
+  const [manualHintSlugs, setManualHintSlugs] = useState<string[]>([]);
+  const [hiddenDefaultHintSlugs, setHiddenDefaultHintSlugs] = useState<string[]>([]);
   const [showSolution, setShowSolution] = useState(false);
-  const recordPlaygroundAttempt = useProgressStore((state) => state.recordPlaygroundAttempt);
 
   const status = useMemo(() => {
     if (code.includes(challenge.keyword)) {
@@ -116,13 +118,32 @@ export function PracticePlayground() {
   }, [challenge.keyword, code]);
 
   const relatedConcept = concepts.find((concept) => concept.slug === selectedSlug);
+  const showHint = showHintsByDefault
+    ? !hiddenDefaultHintSlugs.includes(challenge.slug)
+    : manualHintSlugs.includes(challenge.slug);
 
   function selectChallenge(slug: string) {
     const next = challenges.find((item) => item.slug === slug) ?? challenges[0];
     setSelectedSlug(slug);
     setCode(next.starter);
-    setShowHint(false);
     setShowSolution(false);
+  }
+
+  function toggleHint() {
+    if (showHintsByDefault) {
+      setHiddenDefaultHintSlugs((slugs) =>
+        slugs.includes(challenge.slug)
+          ? slugs.filter((slug) => slug !== challenge.slug)
+          : [...slugs, challenge.slug],
+      );
+      return;
+    }
+
+    setManualHintSlugs((slugs) =>
+      slugs.includes(challenge.slug)
+        ? slugs.filter((slug) => slug !== challenge.slug)
+        : [...slugs, challenge.slug],
+    );
   }
 
   function submitAttempt() {
@@ -213,7 +234,7 @@ export function PracticePlayground() {
                   <CheckCircle2 size={16} aria-hidden />
                   Check answer
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowHint((value) => !value)}>
+                <Button type="button" variant="outline" onClick={toggleHint}>
                   <Lightbulb size={16} aria-hidden />
                   Hint
                 </Button>
@@ -229,7 +250,12 @@ export function PracticePlayground() {
                   Reset
                 </Button>
               </div>
-              {showHint ? <p className="mt-4 rounded-2xl bg-warning/10 p-4 text-sm text-muted">{challenge.hint}</p> : null}
+              {showHint ? (
+                <p className="mt-4 rounded-2xl bg-warning/10 p-4 text-sm text-muted">
+                  {showHintsByDefault ? <span className="font-semibold text-foreground">Default hint on: </span> : null}
+                  {challenge.hint}
+                </p>
+              ) : null}
               {showSolution ? (
                 <pre className="mt-4 overflow-x-auto rounded-2xl bg-slate-950 p-4 text-sm leading-7 text-slate-100">
                   <code>{challenge.solution}</code>

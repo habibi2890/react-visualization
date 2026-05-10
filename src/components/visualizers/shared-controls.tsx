@@ -6,11 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useProgressStore } from "@/stores/progress-store";
 import type { ConceptLesson } from "@/types/lesson";
 
 export function useStepPlayer(stepCount: number) {
   const [stepIndex, setStepIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const reducedMotion = useProgressStore((state) => state.preferences.reducedMotion);
+  const effectivePlaying = playing && !reducedMotion;
 
   const next = useCallback(() => setStepIndex((value) => Math.min(stepCount - 1, value + 1)), [stepCount]);
   const previous = useCallback(() => setStepIndex((value) => Math.max(0, value - 1)), []);
@@ -20,7 +23,7 @@ export function useStepPlayer(stepCount: number) {
   }, []);
 
   useEffect(() => {
-    if (!playing) return;
+    if (!effectivePlaying) return;
 
     const id = window.setInterval(() => {
       setStepIndex((current) => {
@@ -34,7 +37,7 @@ export function useStepPlayer(stepCount: number) {
     }, 2200);
 
     return () => window.clearInterval(id);
-  }, [playing, stepCount]);
+  }, [effectivePlaying, stepCount]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -62,6 +65,7 @@ export function useStepPlayer(stepCount: number) {
 
       if (event.key === " ") {
         event.preventDefault();
+        if (reducedMotion) return;
         setPlaying((value) => !value);
       }
     }
@@ -69,12 +73,13 @@ export function useStepPlayer(stepCount: number) {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [next, previous, reset]);
+  }, [next, previous, reducedMotion, reset]);
 
   return {
     stepIndex,
     setStepIndex,
-    playing,
+    playing: effectivePlaying,
+    reducedMotion,
     setPlaying,
     next,
     previous,
@@ -90,6 +95,7 @@ export function StepExplanation({
   onReset,
   onTogglePlay,
   onNext,
+  reducedMotion = false,
 }: {
   lesson: ConceptLesson;
   stepIndex: number;
@@ -98,6 +104,7 @@ export function StepExplanation({
   onReset: () => void;
   onTogglePlay: () => void;
   onNext: () => void;
+  reducedMotion?: boolean;
 }) {
   const step = lesson.steps[stepIndex];
 
@@ -126,9 +133,9 @@ export function StepExplanation({
             <RotateCcw size={16} aria-hidden />
             Reset
           </Button>
-          <Button type="button" onClick={onTogglePlay}>
+          <Button type="button" onClick={onTogglePlay} disabled={reducedMotion}>
             {playing ? <Pause size={16} aria-hidden /> : <Play size={16} aria-hidden />}
-            {playing ? "Pause" : "Play"}
+            {reducedMotion ? "Motion reduced" : playing ? "Pause" : "Play"}
           </Button>
           <Button
             type="button"
@@ -141,7 +148,7 @@ export function StepExplanation({
         </div>
       </div>
       <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-        Shortcuts: ← previous · → next · Space play/pause · Home reset
+        Shortcuts: ← previous · → next · {reducedMotion ? "Space disabled by reduced motion" : "Space play/pause"} · Home reset
       </p>
     </Card>
   );

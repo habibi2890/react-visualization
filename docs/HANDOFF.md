@@ -78,6 +78,7 @@ Validation:
 - Note-aware bookmarks review queue.
 - Quiz feedback with session/best score summary.
 - Progress skill map and weak-area review recommendations.
+- Settings preferences that affect learning screens.
 
 ## 4. How to run locally
 
@@ -425,6 +426,15 @@ Added:
 - Weak-area recommendation card with review/quiz/bookmark CTAs.
 - Notes metric in progress summary.
 - E2E coverage for skill map and weak-area recommendation.
+
+### PR #25 — Settings-driven learning UX
+
+Added:
+
+- `showHintsByDefault` now opens Playground hints automatically.
+- `reducedMotion` disables visualizer autoplay and spacebar play/pause.
+- `dailyGoalMinutes` appears in the Dashboard learning plan.
+- E2E coverage for preferences affecting Playground, Visualizer, and Dashboard.
 
 ## 9. Main user flows
 

@@ -46,6 +46,7 @@ export function SettingsPanel() {
             <span className="font-semibold">Daily learning goal</span>
             <span className="mt-1 block text-sm text-muted">Minutes per day</span>
             <input
+              aria-label="Daily learning goal minutes"
               type="range"
               min="5"
               max="60"

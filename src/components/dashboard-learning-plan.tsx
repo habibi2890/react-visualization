@@ -16,6 +16,7 @@ const pathLessons = primaryPath.lessonSlugs
 export function DashboardLearningPlan() {
   const completedLessons = useProgressStore((state) => state.completedLessons);
   const bookmarks = useProgressStore((state) => state.bookmarks);
+  const dailyGoalMinutes = useProgressStore((state) => state.preferences.dailyGoalMinutes);
   const completedCount = concepts.filter((concept) => completedLessons.includes(concept.slug)).length;
   const pathCompleted = pathLessons.filter((lesson) => completedLessons.includes(lesson.slug)).length;
   const nextLesson = pathLessons.find((lesson) => !completedLessons.includes(lesson.slug)) ?? pathLessons[0];
@@ -54,8 +55,11 @@ export function DashboardLearningPlan() {
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3">
               <Metric icon={CheckCircle2} label="Done" value={`${completedCount}/${concepts.length}`} />
-              <Metric icon={Clock} label="Today" value={`${nextLesson?.estimatedMinutes ?? 12}m`} />
+              <Metric icon={Clock} label="Daily goal" value={`${dailyGoalMinutes}m`} />
             </div>
+            <p className="mt-3 text-xs text-muted">
+              Next lesson is {nextLesson?.estimatedMinutes ?? 12}m of your {dailyGoalMinutes}m daily goal.
+            </p>
           </div>
         </div>
       </Card>
