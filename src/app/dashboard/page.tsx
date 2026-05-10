@@ -1,4 +1,5 @@
-import { Activity, ArrowRight, Bookmark, Sparkles, Target } from "lucide-react";
+import { Activity, ArrowRight, Sparkles, Target } from "lucide-react";
+import { DashboardLearningPlan } from "@/components/dashboard-learning-plan";
 import { AppShell } from "@/components/navigation";
 import { ProgressAwareLessonCard } from "@/components/progress-aware-lesson-card";
 import { ProgressRing } from "@/components/progress-ring";
@@ -49,6 +50,10 @@ export default function DashboardPage() {
           </Card>
         </section>
 
+        <section className="mt-8">
+          <DashboardLearningPlan />
+        </section>
+
         <section className="mt-8 grid gap-6 lg:grid-cols-[1fr_340px]">
           <div>
             <div className="mb-5 flex items-end justify-between gap-4">
@@ -83,25 +88,6 @@ export default function DashboardPage() {
               <ButtonLink href="/visualizers/react-render-cycle" className="mt-5 w-full">
                 Open visualizer
               </ButtonLink>
-            </Card>
-
-            <Card>
-              <div className="flex items-center gap-3">
-                <Bookmark className="text-secondary" aria-hidden />
-                <h2 className="font-bold">Bookmarked concepts</h2>
-              </div>
-              <div className="mt-4 space-y-3">
-                {concepts.slice(0, 2).map((lesson) => (
-                  <a
-                    key={lesson.slug}
-                    href={`/visualizers/${lesson.slug}`}
-                    className="block rounded-2xl border border-border bg-surface-muted p-4 transition hover:border-primary/40"
-                  >
-                    <p className="font-semibold">{lesson.title}</p>
-                    <p className="mt-1 text-xs text-muted">{lesson.estimatedMinutes} min visual lesson</p>
-                  </a>
-                ))}
-              </div>
             </Card>
 
             <Card>

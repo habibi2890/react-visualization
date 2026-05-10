@@ -73,6 +73,19 @@ test("learning path highlights progress and next lesson", async ({ page }) => {
   );
 });
 
+test("dashboard shows a resume learning plan", async ({ page }) => {
+  await page.goto("/dashboard");
+
+  await expect(page.getByRole("heading", { name: /today, make one invisible react idea visible/i })).toBeVisible();
+  await expect(page.getByText(/today's learning plan/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /continue with react render cycle/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /resume lesson/i })).toHaveAttribute(
+    "href",
+    "/visualizers/react-render-cycle",
+  );
+  await expect(page.getByRole("link", { name: /practice code/i })).toHaveAttribute("href", "/playground");
+});
+
 test("route map explorer shows app router details", async ({ page }) => {
   await page.goto("/route-map");
 
