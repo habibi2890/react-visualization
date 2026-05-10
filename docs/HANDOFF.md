@@ -341,6 +341,14 @@ Added:
 - E2E coverage for landing → Start Here, React Render Cycle visualizer controls, Route Map, Playground, Compare, and Glossary.
 - CI step for Playwright smoke tests.
 
+### PR #16 — Visualizer keyboard shortcuts
+
+Added:
+
+- Shared visualizer keyboard shortcuts: `ArrowLeft`, `ArrowRight`, `Space`, and `Home`.
+- Helper text in step controls so shortcuts are discoverable.
+- E2E coverage for keyboard-driven step navigation.
+
 ## 9. Main user flows
 
 ### Beginner first-time learner
@@ -458,7 +466,6 @@ Existing implementation uses:
 
 Future accessibility improvements:
 
-- Add keyboard shortcut support for visualizer step controls.
 - Add reduced-motion-specific animation fallbacks if more animations are introduced.
 - Add automated accessibility checks such as Playwright + axe.
 
