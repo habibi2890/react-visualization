@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, CheckCircle2, Clock, Flame, PlayCircle, Target } 
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { RecentActivity } from "@/components/recent-activity";
 import { concepts, learningPaths } from "@/content/lessons";
 import { useProgressStore } from "@/stores/progress-store";
 
@@ -103,6 +104,10 @@ export function DashboardLearningPlan() {
           ))}
         </div>
       </Card>
+
+      <div className="lg:col-span-2">
+        <RecentActivity compact />
+      </div>
     </div>
   );
 }

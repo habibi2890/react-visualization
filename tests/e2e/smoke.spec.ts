@@ -104,9 +104,23 @@ test("progress page shows skill map and weak area", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: /track what you understand/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /where your mental models are forming/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /your latest learning moves/i })).toBeVisible();
   await expect(page.getByText(/react fundamentals/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: /weak area to review next/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /retake quiz/i })).toHaveAttribute("href", "/quiz");
+});
+
+test("recent activity records learning actions", async ({ page }) => {
+  await page.goto("/visualizers/react-render-cycle");
+
+  await page.getByLabel("Lesson note").fill("Render creates a snapshot, commit updates the screen.");
+  await expect(page.getByText(/render creates a snapshot/i)).toBeVisible();
+  await page.getByRole("button", { name: /mark lesson complete/i }).click();
+
+  await page.goto("/dashboard");
+  await expect(page.getByRole("heading", { name: /your latest learning moves/i })).toBeVisible();
+  await expect(page.getByText(/lesson completed/i)).toBeVisible();
+  await expect(page.getByText(/note saved/i)).toBeVisible();
 });
 
 test("settings preferences affect learning screens", async ({ page }) => {
