@@ -1,7 +1,6 @@
 import { AppShell } from "@/components/navigation";
-import { LessonCard } from "@/components/lesson-card";
+import { ConceptBrowser } from "@/components/concept-browser";
 import { Badge } from "@/components/ui/badge";
-import { concepts } from "@/content/lessons";
 
 export default function ConceptsPage() {
   return (
@@ -11,11 +10,10 @@ export default function ConceptsPage() {
         <h1 className="mt-5 text-4xl font-bold tracking-[-0.04em] md:text-6xl">
           Learn one invisible concept at a time.
         </h1>
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {concepts.map((concept) => (
-            <LessonCard key={concept.id} lesson={concept} />
-          ))}
-        </div>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
+          Search and filter concept visualizers by topic, category, and mental model.
+        </p>
+        <ConceptBrowser />
       </div>
     </AppShell>
   );
