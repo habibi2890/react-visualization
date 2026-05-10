@@ -1,12 +1,15 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Pause, Play, RotateCcw } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  QuizPanel,
+  StepExplanation,
+  Timeline,
+  useStepPlayer,
+} from "@/components/visualizers/shared-controls";
 import { propsVsStateLesson } from "@/content/lessons";
 import { cn } from "@/lib/utils";
 
@@ -14,28 +17,9 @@ const lesson = propsVsStateLesson;
 const code = lesson.codeExamples[0].code;
 
 export function PropsVsStateVisualizer() {
-  const [stepIndex, setStepIndex] = useState(0);
-  const [playing, setPlaying] = useState(false);
+  const player = useStepPlayer(lesson.steps.length);
+  const { stepIndex, playing } = player;
   const step = lesson.steps[stepIndex];
-
-  useEffect(() => {
-    if (!playing) return;
-
-    const id = window.setInterval(() => {
-      setStepIndex((current) => {
-        if (current >= lesson.steps.length - 1) {
-          setPlaying(false);
-          return current;
-        }
-
-        return current + 1;
-      });
-    }, 2200);
-
-    return () => window.clearInterval(id);
-  }, [playing]);
-
-  const timeline = useMemo(() => lesson.steps.slice(0, stepIndex + 1), [stepIndex]);
 
   return (
     <div className="grid gap-5">
@@ -70,78 +54,19 @@ export function PropsVsStateVisualizer() {
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[1fr_0.9fr]">
-        <Card>
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <Badge variant="primary">
-                Step {stepIndex + 1} of {lesson.steps.length}
-              </Badge>
-              <h2 className="mt-3 text-2xl font-bold">{step.title}</h2>
-              <p className="mt-2 leading-7 text-muted">{step.description}</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setStepIndex((value) => Math.max(0, value - 1))}
-                disabled={stepIndex === 0}
-                aria-label="Previous step"
-              >
-                <ArrowLeft size={16} aria-hidden />
-                Back
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  setStepIndex(0);
-                  setPlaying(false);
-                }}
-              >
-                <RotateCcw size={16} aria-hidden />
-                Reset
-              </Button>
-              <Button type="button" onClick={() => setPlaying((value) => !value)}>
-                {playing ? <Pause size={16} aria-hidden /> : <Play size={16} aria-hidden />}
-                {playing ? "Pause" : "Play"}
-              </Button>
-              <Button
-                type="button"
-                onClick={() => setStepIndex((value) => Math.min(lesson.steps.length - 1, value + 1))}
-                disabled={stepIndex === lesson.steps.length - 1}
-              >
-                Next
-                <ArrowRight size={16} aria-hidden />
-              </Button>
-            </div>
-          </div>
-        </Card>
-
-        <QuizCard />
+        <StepExplanation
+          lesson={lesson}
+          stepIndex={stepIndex}
+          playing={playing}
+          onPrevious={player.previous}
+          onReset={player.reset}
+          onTogglePlay={() => player.setPlaying((value) => !value)}
+          onNext={player.next}
+        />
+        <QuizPanel lesson={lesson} />
       </div>
 
-      <Card>
-        <h2 className="text-xl font-bold">Render timeline</h2>
-        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {timeline.map((item, index) => (
-            <div
-              key={item.id}
-              className={cn(
-                "rounded-2xl border p-4",
-                index === timeline.length - 1
-                  ? "border-primary bg-primary-soft/60"
-                  : "border-border bg-surface-muted",
-              )}
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <p className="mt-2 font-bold">{item.timelineEvent}</p>
-              <p className="mt-2 text-xs leading-5 text-muted">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </Card>
+      <Timeline lesson={lesson} stepIndex={stepIndex} title="Render timeline" />
     </div>
   );
 }
@@ -281,34 +206,6 @@ function InspectorPanel({
           </div>
         ))}
       </div>
-    </Card>
-  );
-}
-
-function QuizCard() {
-  const question = lesson.quiz[0];
-
-  return (
-    <Card>
-      <Badge variant="warning">Mini quiz</Badge>
-      <h2 className="mt-3 text-xl font-bold">{question.question}</h2>
-      <div className="mt-4 space-y-2">
-        {question.options.map((option, index) => (
-          <button
-            key={option}
-            type="button"
-            className={cn(
-              "w-full rounded-2xl border px-4 py-3 text-left text-sm transition hover:border-primary/50",
-              index === question.correctOptionIndex
-                ? "border-success/40 bg-success/10"
-                : "border-border bg-surface-muted",
-            )}
-          >
-            {option}
-          </button>
-        ))}
-      </div>
-      <p className="mt-4 text-sm leading-6 text-muted">{question.explanation}</p>
     </Card>
   );
 }
