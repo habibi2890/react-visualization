@@ -48,6 +48,7 @@ export default function AboutPage() {
               <ButtonLink href="/concepts">Browse concepts</ButtonLink>
               <ButtonLink href="/compare" variant="outline">Compare concepts</ButtonLink>
               <ButtonLink href="/glossary" variant="outline">Open glossary</ButtonLink>
+              <ButtonLink href="/demo-script" variant="outline">Demo script</ButtonLink>
               <ButtonLink href="/roadmaps" variant="outline">View roadmaps</ButtonLink>
               <ButtonLink href="/playground" variant="outline">Try playground</ButtonLink>
             </div>

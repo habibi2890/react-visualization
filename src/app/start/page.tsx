@@ -90,6 +90,15 @@ export default function StartPage() {
                 Open glossary
               </ButtonLink>
             </Card>
+            <Card>
+              <h2 className="text-xl font-bold">Presenting this project?</h2>
+              <p className="mt-3 text-sm leading-6 text-muted">
+                Use the demo script for a clear 5-minute walkthrough.
+              </p>
+              <ButtonLink href="/demo-script" variant="outline" className="mt-5 w-full">
+                Open demo script
+              </ButtonLink>
+            </Card>
           </aside>
         </div>
       </div>
