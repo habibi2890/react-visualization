@@ -6,8 +6,12 @@ import { persist } from "zustand/middleware";
 type ProgressState = {
   completedLessons: string[];
   bookmarks: string[];
+  quizScores: Record<string, number>;
+  playgroundAttempts: Record<string, number>;
   toggleBookmark: (slug: string) => void;
   markComplete: (slug: string) => void;
+  saveQuizScore: (slug: string, score: number) => void;
+  recordPlaygroundAttempt: (slug: string) => void;
 };
 
 export const useProgressStore = create<ProgressState>()(
@@ -15,6 +19,8 @@ export const useProgressStore = create<ProgressState>()(
     (set) => ({
       completedLessons: ["props-vs-state"],
       bookmarks: ["props-vs-state"],
+      quizScores: {},
+      playgroundAttempts: {},
       toggleBookmark: (slug) =>
         set((state) => ({
           bookmarks: state.bookmarks.includes(slug)
@@ -26,6 +32,20 @@ export const useProgressStore = create<ProgressState>()(
           completedLessons: state.completedLessons.includes(slug)
             ? state.completedLessons
             : [...state.completedLessons, slug],
+        })),
+      saveQuizScore: (slug, score) =>
+        set((state) => ({
+          quizScores: {
+            ...state.quizScores,
+            [slug]: Math.max(state.quizScores[slug] ?? 0, score),
+          },
+        })),
+      recordPlaygroundAttempt: (slug) =>
+        set((state) => ({
+          playgroundAttempts: {
+            ...state.playgroundAttempts,
+            [slug]: (state.playgroundAttempts[slug] ?? 0) + 1,
+          },
         })),
     }),
     { name: "react-visual-lab-progress" },

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/navigation";
-import { LessonCard } from "@/components/lesson-card";
+import { ProgressAwareLessonCard } from "@/components/progress-aware-lesson-card";
 import { ProgressRing } from "@/components/progress-ring";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -48,8 +48,8 @@ export default async function LearningPathPage({
           <section className="mt-8">
             <h2 className="text-3xl font-bold tracking-[-0.03em]">Lessons</h2>
             <div className="mt-5 grid gap-6 md:grid-cols-2">
-              {lessons.map((lesson, index) => (
-                <LessonCard key={lesson.id} lesson={lesson} completed={index === 0} />
+              {lessons.map((lesson) => (
+                <ProgressAwareLessonCard key={lesson.id} lesson={lesson} />
               ))}
             </div>
           </section>
