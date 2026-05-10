@@ -71,6 +71,18 @@ test("lesson notes persist per lesson", async ({ page }) => {
   await expect(page.getByLabel("Lesson note")).toHaveValue("Props flow down, state lives where changes happen.");
 });
 
+test("bookmarks page shows a note-aware review queue", async ({ page }) => {
+  await page.goto("/bookmarks");
+
+  await expect(page.getByRole("heading", { name: /saved concepts for review/i })).toBeVisible();
+  await expect(page.getByText("Review queue", { exact: true })).toBeVisible();
+  await expect(page.getByText(/props flow down\. state lives where changes happen/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /review visualizer/i })).toHaveAttribute(
+    "href",
+    "/visualizers/props-vs-state",
+  );
+});
+
 test("learning path highlights progress and next lesson", async ({ page }) => {
   await page.goto("/paths/react-beginner");
 
