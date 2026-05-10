@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/navigation";
 import { PropsVsStateVisualizer } from "@/components/visualizers/props-vs-state-visualizer";
+import { RenderCycleVisualizer } from "@/components/visualizers/render-cycle-visualizer";
 import { ServerClientVisualizer } from "@/components/visualizers/server-client-visualizer";
 import { UseEffectDependencyVisualizer } from "@/components/visualizers/use-effect-dependency-visualizer";
 import { Badge } from "@/components/ui/badge";
@@ -75,6 +76,10 @@ function VisualizerSwitch({ slug }: { slug: string }) {
 
   if (slug === "use-effect-dependency-array") {
     return <UseEffectDependencyVisualizer />;
+  }
+
+  if (slug === "react-render-cycle") {
+    return <RenderCycleVisualizer />;
   }
 
   if (slug === "server-vs-client-components") {

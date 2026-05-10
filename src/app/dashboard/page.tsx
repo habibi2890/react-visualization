@@ -18,10 +18,10 @@ export default function DashboardPage() {
               Today, make one invisible React idea visible.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-              Continue with Props vs State and watch state ownership, props flow, and re-renders happen step by step.
+              Continue with the React Render Cycle and watch click, setState, render, commit, and effects happen step by step.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/visualizers/props-vs-state">
+              <ButtonLink href="/visualizers/react-render-cycle">
                 Continue lesson
                 <ArrowRight size={18} aria-hidden />
               </ButtonLink>
@@ -69,9 +69,9 @@ export default function DashboardPage() {
                 <h2 className="font-bold">Suggested next step</h2>
               </div>
               <p className="mt-4 text-sm leading-6 text-muted">
-                Learn why changing state makes React render again, then review the render timeline.
+                Learn why changing state schedules a render, when the DOM updates, and why effects run after commit.
               </p>
-              <ButtonLink href="/visualizers/props-vs-state" className="mt-5 w-full">
+              <ButtonLink href="/visualizers/react-render-cycle" className="mt-5 w-full">
                 Open visualizer
               </ButtonLink>
             </Card>
