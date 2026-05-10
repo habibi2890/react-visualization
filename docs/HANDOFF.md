@@ -73,6 +73,7 @@ Validation:
 - Global command menu via Ctrl/⌘+K.
 - Lesson completion and next-step panel on concept/visualizer pages.
 - Completion-aware learning path progress UI.
+- Resume-focused dashboard learning plan.
 
 ## 4. How to run locally
 
@@ -375,6 +376,15 @@ Added:
 - Completion-aware learning path summary with next lesson CTA.
 - Sequential lesson rows with done/current/up-next states.
 - E2E coverage for path progress and next-lesson routing.
+
+### PR #20 — Dashboard learning plan
+
+Added:
+
+- Resume-focused dashboard panel that recommends the next incomplete lesson.
+- Quick actions for playground practice, mistake debugging, and glossary review.
+- Bookmark/recommendation section to reduce return-user friction.
+- E2E coverage for dashboard resume CTA and quick actions.
 
 ## 9. Main user flows
 
