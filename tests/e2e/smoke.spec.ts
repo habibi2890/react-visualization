@@ -30,7 +30,7 @@ test("command menu jumps to lessons and routes", async ({ page }) => {
 test("render cycle visualizer advances through steps", async ({ page }) => {
   await page.goto("/visualizers/react-render-cycle");
 
-  await expect(page.getByRole("heading", { name: "React Render Cycle" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "React Render Cycle", exact: true })).toBeVisible();
   await expect(page.getByText("Step 1 of")).toBeVisible();
   await expect(page.getByText(/shortcuts:/i)).toBeVisible();
 
@@ -55,9 +55,20 @@ test("render cycle visualizer advances through steps", async ({ page }) => {
 test("concept detail includes completion guidance", async ({ page }) => {
   await page.goto("/concepts/use-effect-dependency-array");
 
-  await expect(page.getByRole("heading", { name: /useeffect dependency array/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "useEffect Dependency Array", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /my notes for useeffect dependency array/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /ready to lock in this concept/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /review full path/i })).toBeVisible();
+});
+
+test("lesson notes persist per lesson", async ({ page }) => {
+  await page.goto("/visualizers/props-vs-state");
+
+  await page.getByLabel("Lesson note").fill("Props flow down, state lives where changes happen.");
+  await expect(page.getByText(/50 characters saved locally/i)).toBeVisible();
+
+  await page.reload();
+  await expect(page.getByLabel("Lesson note")).toHaveValue("Props flow down, state lives where changes happen.");
 });
 
 test("learning path highlights progress and next lesson", async ({ page }) => {
