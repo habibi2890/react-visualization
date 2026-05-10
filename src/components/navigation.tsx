@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { BookOpen, FlaskConical, LayoutDashboard, Map, PlayCircle, Star } from "lucide-react";
+import { BookOpen, FlaskConical, LayoutDashboard, Library, Map, PlayCircle, Star } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/concepts", label: "Concepts", icon: Library },
   { href: "/paths/react-beginner", label: "Learn React", icon: BookOpen },
   { href: "/paths/nextjs-beginner", label: "Learn Next.js", icon: Map },
   { href: "/visualizers/props-vs-state", label: "Visualizers", icon: PlayCircle },

@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/navigation";
 import { PropsVsStateVisualizer } from "@/components/visualizers/props-vs-state-visualizer";
+import { ServerClientVisualizer } from "@/components/visualizers/server-client-visualizer";
+import { UseEffectDependencyVisualizer } from "@/components/visualizers/use-effect-dependency-visualizer";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -56,16 +58,7 @@ export default async function VisualizerPage({
           </div>
         </Card>
 
-        {slug === "props-vs-state" ? (
-          <PropsVsStateVisualizer />
-        ) : (
-          <Card>
-            <h2 className="text-2xl font-bold">Visualizer coming next</h2>
-            <p className="mt-3 text-muted">
-              This MVP ships the complete Props vs State visualizer first. This concept is included as structured content for the next implementation pass.
-            </p>
-          </Card>
-        )}
+        <VisualizerSwitch slug={slug} />
       </div>
     </AppShell>
   );
@@ -73,4 +66,25 @@ export default async function VisualizerPage({
 
 export function generateStaticParams() {
   return concepts.map((concept) => ({ slug: concept.slug }));
+}
+
+function VisualizerSwitch({ slug }: { slug: string }) {
+  if (slug === "props-vs-state") {
+    return <PropsVsStateVisualizer />;
+  }
+
+  if (slug === "use-effect-dependency-array") {
+    return <UseEffectDependencyVisualizer />;
+  }
+
+  if (slug === "server-vs-client-components") {
+    return <ServerClientVisualizer />;
+  }
+
+  return (
+    <Card>
+      <h2 className="text-2xl font-bold">Visualizer coming next</h2>
+      <p className="mt-3 text-muted">This concept is included as structured content.</p>
+    </Card>
+  );
 }
