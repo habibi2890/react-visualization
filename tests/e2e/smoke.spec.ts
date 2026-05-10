@@ -109,6 +109,28 @@ test("progress page shows skill map and weak area", async ({ page }) => {
   await expect(page.getByRole("link", { name: /retake quiz/i })).toHaveAttribute("href", "/quiz");
 });
 
+test("settings preferences affect learning screens", async ({ page }) => {
+  await page.goto("/settings");
+
+  await page.getByLabel(/show hints by default/i).check();
+  await page.getByLabel(/reduce motion/i).check();
+  await page.getByLabel(/daily learning goal minutes/i).press("ArrowRight");
+  await expect(page.getByText("25 minutes")).toBeVisible();
+  await page.waitForFunction(() => {
+    const raw = window.localStorage.getItem("react-visual-lab-progress");
+    return raw?.includes('"showHintsByDefault":true') && raw.includes('"reducedMotion":true');
+  });
+
+  await page.goto("/playground");
+  await expect(page.getByText(/default hint on/i)).toBeVisible();
+
+  await page.goto("/visualizers/react-render-cycle");
+  await expect(page.getByRole("button", { name: /motion reduced/i })).toBeDisabled();
+
+  await page.goto("/dashboard");
+  await expect(page.getByText(/25m/).first()).toBeVisible();
+});
+
 test("learning path highlights progress and next lesson", async ({ page }) => {
   await page.goto("/paths/react-beginner");
 
