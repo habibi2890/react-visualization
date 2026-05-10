@@ -25,7 +25,7 @@ Main pages and flows:
 
 - `/` — landing page.
 - `/start` — beginner onboarding.
-- `/dashboard` — resume-focused learning plan.
+- `/dashboard` — resume-focused learning plan, daily goal progress, and recent activity.
 - `/learn/react` and `/learn/nextjs` — learning hubs.
 - `/paths` and `/paths/[slug]` — learning paths with progress state.
 - `/concepts` and `/concepts/[slug]` — concept library and detail pages.
@@ -34,7 +34,7 @@ Main pages and flows:
 - `/playground` — guided practice playground.
 - `/quiz` — quiz flow with feedback and best-score persistence.
 - `/mistake-lab` — common mistake simulator/explorer.
-- `/progress` — progress summary, skill map, weak-area recommendation, and activity timeline.
+- `/progress` — progress summary, daily goal progress, skill map, weak-area recommendation, and activity timeline.
 - `/bookmarks` — note-aware review queue.
 - `/compare` — concept comparison cards.
 - `/glossary` — beginner glossary.
@@ -49,6 +49,7 @@ Implemented learning UX:
 - Lesson completion panel with next-step CTA.
 - Learning-path progress and current/next/done states.
 - Dashboard daily plan and resume CTA.
+- Daily goal progress based on today's local learning activity.
 - Per-lesson notes stored locally.
 - Bookmarks upgraded into a review queue.
 - Quiz feedback with explanations, correct-answer reveal, and best score.
@@ -188,6 +189,7 @@ src/components/
   lesson-completion-panel.tsx Completion and next-step panel
   lesson-notes.tsx            Per-lesson notes
   progress-summary.tsx        Progress metrics, skill map, weak area
+  daily-goal-progress.tsx     Daily goal progress from activity + preferences
   recent-activity.tsx         Recent activity timeline
   bookmark-button.tsx         Bookmark and complete lesson actions
   code-block.tsx              Code display with active line highlighting
@@ -333,6 +335,7 @@ Current smoke coverage includes:
 - Quiz feedback and next-concept flow.
 - Progress skill map and weak area.
 - Settings preferences affecting Playground/Visualizer/Dashboard.
+- Daily goal progress on Dashboard/Progress.
 - Dashboard learning plan.
 - Route map explorer.
 - Playground challenge validation.
@@ -366,6 +369,7 @@ Current smoke coverage includes:
 - PR #24 — Progress skill map.
 - PR #25 — Settings-driven learning UX.
 - PR #26 — Recent activity timeline and refreshed handoff.
+- PR #27 — Daily goal progress UX.
 
 ## 12. Main user flows
 

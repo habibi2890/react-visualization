@@ -1,6 +1,7 @@
 "use client";
 
 import { Award, BookOpen, Brain, Compass, NotebookPen, Target } from "lucide-react";
+import { DailyGoalProgress } from "@/components/daily-goal-progress";
 import { ProgressRing } from "@/components/progress-ring";
 import { RecentActivity } from "@/components/recent-activity";
 import { Badge } from "@/components/ui/badge";
@@ -62,6 +63,8 @@ export function ProgressSummary() {
           );
         })}
       </div>
+
+      <DailyGoalProgress />
 
       <Card>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

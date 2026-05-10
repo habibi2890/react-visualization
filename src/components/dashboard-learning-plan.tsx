@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, BookOpen, CheckCircle2, Clock, Flame, PlayCircle, Target } from "lucide-react";
+import { DailyGoalProgress } from "@/components/daily-goal-progress";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -76,6 +77,10 @@ export function DashboardLearningPlan() {
           <QuickAction href="/glossary" icon={BookOpen} title="Review glossary" description="Translate confusing terms into simple language." />
         </div>
       </Card>
+
+      <div className="lg:col-span-2">
+        <DailyGoalProgress />
+      </div>
 
       <Card className="lg:col-span-2">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
