@@ -356,6 +356,127 @@ export const renderCycleLesson: ConceptLesson = {
   relatedConcepts: ["State snapshots", "Render purity", "Effect timing"],
 };
 
+export const keysListDiffingLesson: ConceptLesson = {
+  id: "react-keys-list-diffing",
+  slug: "keys-list-diffing",
+  title: "React Keys & List Diffing",
+  category: "react",
+  difficulty: "beginner",
+  estimatedMinutes: 13,
+  prerequisites: ["List rendering", "React Render Cycle"],
+  shortDescription:
+    "See how React uses keys to match list items, preserve state, and avoid confusing UI bugs.",
+  learningGoals: [
+    "Explain why every rendered list item needs a stable key",
+    "Predict how React matches old and new list items",
+    "Understand why index keys break when lists reorder",
+    "Choose stable IDs for real app data",
+  ],
+  explanation:
+    "Keys help React identify which list item is the same item between renders, even when order changes.",
+  mentalModel:
+    "Think of keys like name tags. Without stable name tags, React may keep the wrong local state attached to the wrong item after a reorder.",
+  codeExamples: [
+    {
+      id: "todo-list-keys",
+      title: "Todo list with stable IDs",
+      language: "tsx",
+      highlightedLines: [6, 7, 8],
+      code: `function TodoList({ todos }) {
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <TodoRow
+          key={todo.id}
+          todo={todo}
+        />
+      ))}
+    </ul>
+  );
+}`,
+    },
+  ],
+  visualizationType: "comparison",
+  steps: [
+    {
+      id: "initial-list",
+      title: "Initial list renders",
+      description:
+        "React renders three rows. Each row has a stable key from the data ID.",
+      activeCodeLines: [4, 5, 6],
+      timelineEvent: "Initial list",
+      inspectorNotes: ["Keys: a1, b2, c3", "Each TodoRow gets its own identity."],
+      activeComponents: ["List", "Stable keys"],
+    },
+    {
+      id: "insert-item",
+      title: "A new item is inserted",
+      description:
+        "A new todo appears at the top. React compares keys instead of only comparing positions.",
+      activeCodeLines: [4, 6],
+      timelineEvent: "Insert new row",
+      inspectorNotes: ["New key d4 is mounted.", "Existing keys keep their identity."],
+      activeComponents: ["Diff", "New item"],
+    },
+    {
+      id: "match-keys",
+      title: "React matches old rows by key",
+      description:
+        "Rows with keys a1, b2, and c3 are reused even though their positions moved down.",
+      activeCodeLines: [6],
+      timelineEvent: "Match by key",
+      inspectorNotes: ["Stable keys preserve row state.", "Only the new row is mounted."],
+      activeComponents: ["Diff", "Stable keys"],
+    },
+    {
+      id: "commit-list",
+      title: "DOM updates safely",
+      description:
+        "The visible list changes order, but each row keeps the right data and local state.",
+      activeCodeLines: [1, 4, 7],
+      timelineEvent: "Commit list update",
+      inspectorNotes: ["Rows move without losing identity.", "Inputs and focus stay with the right item."],
+      activeComponents: ["DOM", "Stable keys"],
+    },
+    {
+      id: "index-key-mistake",
+      title: "Common mistake",
+      description:
+        "Using array index as key can attach old row state to the wrong item when the list is inserted, removed, or sorted.",
+      activeCodeLines: [],
+      timelineEvent: "Index key bug",
+      inspectorNotes: ["Index 0 now points to different data.", "Local state can appear on the wrong row."],
+      activeComponents: ["Mistake", "Index keys"],
+      showMistake: true,
+    },
+  ],
+  commonMistakes: [
+    {
+      id: "using-index-as-key",
+      title: "Using array index as key for reorderable lists",
+      brokenCode: `{todos.map((todo, index) => (
+  <TodoRow key={index} todo={todo} />
+))}`,
+      explanation:
+        "Index keys describe position, not identity. When the list changes order, the same index may now point to a different todo.",
+      fix: "Use a stable ID from the data, such as key={todo.id}.",
+      preventionTip:
+        "If items can be inserted, removed, filtered, or sorted, never use the array index as the key.",
+    },
+  ],
+  quiz: [
+    {
+      id: "best-list-key",
+      question: "Which key is safest for a todo item that can move in the list?",
+      options: ["index", "todo.id", "Math.random()", "todo.title length"],
+      correctOptionIndex: 1,
+      explanation:
+        "A stable ID follows the same item across renders, so React can preserve the right row identity.",
+    },
+  ],
+  relatedConcepts: ["List rendering", "Reconciliation", "Render cycle"],
+};
+
 export const useEffectDependencyLesson: ConceptLesson = {
   id: "react-use-effect-dependencies",
   slug: "use-effect-dependency-array",
@@ -637,6 +758,7 @@ export default async function ProductPage() {
 export const concepts: ConceptLesson[] = [
   propsVsStateLesson,
   renderCycleLesson,
+  keysListDiffingLesson,
   useEffectDependencyLesson,
   serverClientComponentsLesson,
 ];
@@ -658,7 +780,7 @@ export const learningPaths: LearningPath[] = [
       "Predict simple re-renders",
       "Avoid common beginner mistakes",
     ],
-    lessonSlugs: ["props-vs-state", "react-render-cycle", "use-effect-dependency-array"],
+    lessonSlugs: ["props-vs-state", "react-render-cycle", "keys-list-diffing", "use-effect-dependency-array"],
   },
   {
     id: "nextjs-beginner",

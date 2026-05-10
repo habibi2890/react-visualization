@@ -61,6 +61,20 @@ useEffect(() => {
     keyword: "[userId]",
   },
   {
+    slug: "keys-list-diffing",
+    title: "Replace index keys",
+    prompt: "Use a stable todo ID so row state follows the right item after sorting or inserting.",
+    starter: `{todos.map((todo, index) => (
+  <TodoRow key={index} todo={todo} />
+))}`,
+    solution: `{todos.map((todo) => (
+  <TodoRow key={todo.id} todo={todo} />
+))}`,
+    hint: "A key should describe item identity, not its current position.",
+    visual: "React matches rows by todo.id, so existing rows move without swapping local state.",
+    keyword: "todo.id",
+  },
+  {
     slug: "server-vs-client-components",
     title: "Shrink the client boundary",
     prompt: "Keep data fetching on the server and move use client to the interactive button.",

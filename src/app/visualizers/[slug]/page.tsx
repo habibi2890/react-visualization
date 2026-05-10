@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/navigation";
+import { KeysListDiffingVisualizer } from "@/components/visualizers/keys-list-diffing-visualizer";
 import { PropsVsStateVisualizer } from "@/components/visualizers/props-vs-state-visualizer";
 import { RenderCycleVisualizer } from "@/components/visualizers/render-cycle-visualizer";
 import { ServerClientVisualizer } from "@/components/visualizers/server-client-visualizer";
@@ -80,6 +81,10 @@ function VisualizerSwitch({ slug }: { slug: string }) {
 
   if (slug === "react-render-cycle") {
     return <RenderCycleVisualizer />;
+  }
+
+  if (slug === "keys-list-diffing") {
+    return <KeysListDiffingVisualizer />;
   }
 
   if (slug === "server-vs-client-components") {
