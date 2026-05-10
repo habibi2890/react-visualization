@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
+import { LearningPathProgress } from "@/components/learning-path-progress";
 import { AppShell } from "@/components/navigation";
-import { ProgressAwareLessonCard } from "@/components/progress-aware-lesson-card";
 import { ProgressRing } from "@/components/progress-ring";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -45,14 +45,9 @@ export default async function LearningPathPage({
             </div>
           </Card>
 
-          <section className="mt-8">
-            <h2 className="text-3xl font-bold tracking-[-0.03em]">Lessons</h2>
-            <div className="mt-5 grid gap-6 md:grid-cols-2">
-              {lessons.map((lesson) => (
-                <ProgressAwareLessonCard key={lesson.id} lesson={lesson} />
-              ))}
-            </div>
-          </section>
+          <div className="mt-8">
+            <LearningPathProgress path={path} lessons={lessons} />
+          </div>
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
