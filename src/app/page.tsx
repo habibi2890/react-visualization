@@ -71,7 +71,7 @@ export default function Home() {
               Learn components, props, state, hooks, rendering, routing, and server/client boundaries through interactive diagrams, code, and step-by-step visualizations.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/dashboard">
+              <ButtonLink href="/start">
                 Start learning visually
                 <ArrowRight size={18} aria-hidden />
               </ButtonLink>

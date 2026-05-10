@@ -21,6 +21,9 @@ export default function DashboardPage() {
               Continue with the React Render Cycle and watch click, setState, render, commit, and effects happen step by step.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/start" variant="outline">
+                Start here
+              </ButtonLink>
               <ButtonLink href="/visualizers/react-render-cycle">
                 Continue lesson
                 <ArrowRight size={18} aria-hidden />

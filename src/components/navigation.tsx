@@ -13,6 +13,7 @@ import {
   Puzzle,
   Route,
   Settings,
+  Sparkles,
   Star,
   Trophy,
 } from "lucide-react";
@@ -21,6 +22,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
+  { href: "/start", label: "Start Here", icon: Sparkles },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/concepts", label: "Concepts", icon: Library },
   { href: "/compare", label: "Compare", icon: GitCompareArrows },
@@ -40,6 +42,7 @@ const navItems = [
 ];
 
 const mobileQuickLinks = [
+  { href: "/start", label: "Start" },
   { href: "/dashboard", label: "Dashboard" },
   { href: "/concepts", label: "Concepts" },
   { href: "/compare", label: "Compare" },
@@ -66,6 +69,9 @@ export function MarketingNav() {
         <div className="hidden items-center gap-6 text-sm font-medium text-muted lg:flex">
           <Link href="/paths/react-beginner" className="hover:text-foreground">
             Learn React
+          </Link>
+          <Link href="/start" className="hover:text-foreground">
+            Start Here
           </Link>
           <Link href="/paths/nextjs-beginner" className="hover:text-foreground">
             Learn Next.js
@@ -94,7 +100,7 @@ export function MarketingNav() {
         </div>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <ButtonLink href="/dashboard" className="hidden sm:inline-flex">
+          <ButtonLink href="/start" className="hidden sm:inline-flex">
             Start learning
           </ButtonLink>
         </div>
