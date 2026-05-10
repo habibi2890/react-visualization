@@ -76,6 +76,7 @@ Validation:
 - Resume-focused dashboard learning plan.
 - Per-lesson local notes.
 - Note-aware bookmarks review queue.
+- Quiz feedback with session/best score summary.
 
 ## 4. How to run locally
 
@@ -405,6 +406,15 @@ Added:
 - Saved concepts show completion state, note preview, review CTA, and concept CTA.
 - Seeded example note for the default saved Props vs State lesson.
 - E2E coverage for review queue and note preview.
+
+### PR #23 — Quiz feedback UX
+
+Added:
+
+- Quiz progress summary with session score and best saved score.
+- Stronger answer feedback including correct-answer reveal for wrong choices.
+- Next concept CTA after submission.
+- E2E coverage for quiz feedback and next-concept flow.
 
 ## 9. Main user flows
 
