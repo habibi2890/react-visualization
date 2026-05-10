@@ -1,5 +1,7 @@
 # React/Next.js Visualization Learning Platform
 
+[![CI](https://github.com/habibi2890/react-visualization/actions/workflows/ci.yml/badge.svg)](https://github.com/habibi2890/react-visualization/actions/workflows/ci.yml)
+
 Product and UI/UX blueprint for an interactive learning platform that makes React and Next.js concepts visible through diagrams, animations, code playgrounds, render timelines, route maps, and mistake simulations.
 
 ## Blueprint

@@ -68,6 +68,7 @@ Validation:
 - ESLint via `npm run lint`.
 - TypeScript via `npm run typecheck`.
 - Production build via `npm run build`.
+- GitHub Actions CI via `.github/workflows/ci.yml`.
 
 ## 4. How to run locally
 
@@ -320,6 +321,14 @@ Added:
 - 5-minute walkthrough script for portfolio, classroom, school project, or startup prototype demos.
 - Timed talking points and direct navigation links.
 
+### PR #14 — GitHub Actions CI
+
+Added:
+
+- GitHub Actions workflow for PRs and pushes to `main`.
+- CI validation for `npm ci`, `npm run lint`, `npm run typecheck`, and `npm run build`.
+- README CI status badge.
+
 ## 9. Main user flows
 
 ### Beginner first-time learner
@@ -463,7 +472,6 @@ This is an MVP/prototype. Current limitations:
 - No MDX pipeline yet; lessons are structured TypeScript objects.
 - No real code execution sandbox.
 - Practice Playground is guided and keyword-based, not a full compiler/runtime.
-- No CI workflow configured in the repository at the time of handoff.
 - No hosted preview deployment configured.
 - No E2E test suite yet.
 
@@ -471,10 +479,7 @@ This is an MVP/prototype. Current limitations:
 
 High-value next PRs:
 
-1. Add GitHub Actions CI
-   - Run `npm ci`, `npm run lint`, `npm run typecheck`, `npm run build`.
-
-2. Add E2E smoke tests
+1. Add E2E smoke tests
    - Playwright test for:
      - `/start`
      - `/visualizers/props-vs-state`
@@ -482,11 +487,11 @@ High-value next PRs:
      - `/route-map`
      - `/playground`
 
-3. Add a real code playground
+2. Add a real code playground
    - Sandpack or Monaco.
    - Start with safe guided examples.
 
-4. Add more React lessons
+3. Add more React lessons
    - Component Composition.
    - Conditional Rendering.
    - List Rendering.
@@ -494,18 +499,18 @@ High-value next PRs:
    - Lifting State Up.
    - Context API.
 
-5. Add more Next.js lessons
+4. Add more Next.js lessons
    - Dynamic Routes.
    - Loading/Error/Not Found UI.
    - SSR vs SSG vs ISR.
    - Caching and Revalidation.
    - Server Actions.
 
-6. Add deployment
+5. Add deployment
    - Vercel is the natural default for this stack.
    - Configure preview deployments for PRs.
 
-7. Improve content authoring
+6. Improve content authoring
    - Move lesson data to MDX or JSON files if content grows.
    - Keep the TypeScript model as the validation layer.
 
